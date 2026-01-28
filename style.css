@@ -1,0 +1,554 @@
+/* Birkbeck Colors */
+:root {
+  --birkbeck-purple: #5b2c6f;
+  --birkbeck-gold: #ffd700;
+  --paper-yellow: #fffef5;
+  --sketch-black: #2c2c2c;
+  --notebook-blue: #a2d2ff;
+  --red-margin: #ff6b6b;
+  --notebook-line: #d4e4f7;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Comic Sans MS", "Marker Felt", "Chalkboard", cursive;
+  background: linear-gradient(135deg, var(--birkbeck-purple) 0%, #764ba2 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.game-container {
+  width: 100%;
+  max-width: 1400px;
+  position: relative;
+  background: var(--paper-yellow);
+  padding: 20px;
+  border: 3px solid var(--sketch-black);
+  box-shadow:
+    3px 3px 0 rgba(0, 0, 0, 0.1),
+    6px 6px 0 rgba(0, 0, 0, 0.05),
+    0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.game-content {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.left-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.right-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Sketch/Hand-drawn Border Effect */
+.sketch-box {
+  background: var(--paper-yellow);
+  border: 3px solid var(--sketch-black);
+  border-radius: 2px;
+  padding: 20px;
+  box-shadow:
+    3px 3px 0 rgba(0, 0, 0, 0.1),
+    6px 6px 0 rgba(0, 0, 0, 0.05),
+    0 10px 30px rgba(0, 0, 0, 0.2);
+  position: relative;
+  /* Slight imperfection for hand-drawn feel */
+  transform: rotate(-0.5deg);
+}
+
+/* Notebook Red Margin Line */
+.notebook-margin {
+  border-left: 3px solid var(--red-margin);
+  margin-left: 10px;
+}
+
+/* Hand-written Font Style */
+.handwritten {
+  font-family: "Permanent Marker", "Comic Sans MS", cursive;
+  letter-spacing: 1px;
+}
+
+/* Wobble Animation */
+@keyframes wobble {
+  0%,
+  100% {
+    transform: rotate(-1deg);
+  }
+  50% {
+    transform: rotate(1deg);
+  }
+}
+
+.sketchy {
+  animation: wobble 3s ease-in-out infinite;
+}
+
+/* Birkbeck Header */
+.birkbeck-header {
+  text-align: center;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, var(--birkbeck-purple), #4a2560);
+  padding: 20px;
+  border-radius: 5px;
+  color: var(--birkbeck-gold);
+  border: 3px solid var(--sketch-black);
+}
+
+.owl-logo {
+  font-size: 16px;
+  color: var(--birkbeck-gold);
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.game-title {
+  font-size: 42px;
+  margin: 15px 0 5px 0;
+  color: var(--birkbeck-gold);
+  text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.3);
+  animation: wobble 4s ease-in-out infinite;
+}
+
+.subtitle {
+  font-size: 18px;
+  color: #fff;
+  margin: 5px 0;
+}
+
+.location-badge {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 8px 15px;
+  border-radius: 20px;
+  display: inline-block;
+  margin-top: 10px;
+  color: #fff;
+  font-size: 14px;
+}
+
+.game-status {
+  text-align: center;
+  margin: 15px 0;
+  padding: 10px;
+  background: rgba(255, 215, 0, 0.1);
+  border: 2px dashed var(--birkbeck-gold);
+}
+
+.motto {
+  color: var(--birkbeck-purple);
+  font-size: 16px;
+  font-style: italic;
+}
+
+/* Professor Zone */
+.professor-zone {
+  position: relative;
+  text-align: center;
+  margin: 20px 0;
+}
+
+#profCanvas {
+  display: block;
+  margin: 0 auto;
+  background: transparent;
+}
+
+.speech-bubble {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  padding: 15px 25px;
+  border-radius: 20px;
+  min-width: 200px;
+  z-index: 10;
+  animation: bounce 0.5s ease-out;
+}
+
+.speech-bubble::after {
+  content: "";
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 15px solid #fff;
+}
+
+#speechText {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+  color: var(--sketch-black);
+}
+
+/* Whiteboard */
+.whiteboard {
+  margin: 20px auto;
+  background: #f8f8f8;
+  padding: 15px;
+  max-width: 500px;
+}
+
+.whiteboard-text {
+  font-size: 14px;
+  color: var(--sketch-black);
+  margin: 0;
+}
+
+/* Student Zone */
+.student-zone {
+  position: relative;
+  text-align: center;
+  margin: 30px 0;
+}
+
+#studentCanvas {
+  display: block;
+  margin: 0 auto;
+  background: transparent;
+}
+
+.desk-sketch {
+  margin-top: 10px;
+}
+
+.desk-sketch pre {
+  font-size: 14px;
+  color: var(--sketch-black);
+}
+
+.sleep-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle, transparent 30%, rgba(0, 0, 0, 0.8) 100%);
+  opacity: 0;
+  transition: opacity 1s ease;
+  pointer-events: none;
+  border-radius: 10px;
+}
+
+/* HUD Stats */
+.hud {
+  margin: 20px 0;
+  padding: 20px;
+}
+
+.alertness-section {
+  margin-bottom: 15px;
+}
+
+.stat-label {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--birkbeck-purple);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.bar-container {
+  width: 100%;
+  height: 40px;
+  background: #e0e0e0;
+  border: 3px solid var(--sketch-black);
+  border-radius: 0;
+  overflow: hidden;
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  width: 70%;
+}
+
+.bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ff6b6b, #feca57, #48dbfb, #1dd1a1);
+  transition:
+    width 0.3s ease,
+    background 0.3s ease;
+  position: relative;
+}
+
+.bar-fill::after {
+  content: "⚡";
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 24px;
+}
+
+.percentage {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--birkbeck-purple);
+  margin-left: 15px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.stats-row {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 15px;
+  font-size: 16px;
+  color: var(--sketch-black);
+}
+
+.stat-item {
+  font-weight: bold;
+}
+
+/* Action Buttons */
+.actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 15px 0;
+}
+
+.sketch-button {
+  background: #fff;
+  border: 3px solid var(--sketch-black);
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.1s;
+  position: relative;
+  font-family: "Comic Sans MS", cursive;
+  color: var(--sketch-black);
+  flex: 1;
+  min-width: 120px;
+}
+
+.sketch-button:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 4px 4px 0 var(--sketch-black);
+  background: var(--birkbeck-gold);
+}
+
+.sketch-button:active {
+  transform: translate(0, 0);
+  box-shadow: 1px 1px 0 var(--sketch-black);
+}
+
+.sketch-button small {
+  font-size: 11px;
+  display: block;
+  margin-top: 3px;
+  opacity: 0.7;
+}
+
+/* Instructions */
+.instructions {
+  margin: 20px 0;
+  padding: 15px;
+  background: #fffacd;
+  border: 2px dashed var(--sketch-black);
+  text-align: center;
+}
+
+.instructions p {
+  margin: 5px 0;
+  color: var(--sketch-black);
+}
+
+.small-text {
+  font-size: 12px;
+}
+
+/* Easter Eggs */
+.easter-eggs .doodle {
+  font-size: 30px;
+  opacity: 0.3;
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+/* Game Over Screen */
+.game-over {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.game-over-content {
+  background: var(--paper-yellow);
+  padding: 40px;
+  text-align: center;
+  max-width: 500px;
+  animation: bounce 0.5s ease-out;
+}
+
+.game-over-content h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+  color: var(--birkbeck-purple);
+}
+
+.game-over-content p {
+  font-size: 20px;
+  margin: 15px 0;
+  color: var(--sketch-black);
+}
+
+.highlight {
+  color: var(--birkbeck-purple);
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.achievement {
+  background: var(--birkbeck-gold);
+  padding: 15px;
+  margin: 20px 0;
+  border: 3px solid var(--sketch-black);
+}
+
+.achievement p {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.sketch-button.large {
+  font-size: 24px;
+  padding: 20px 40px;
+  margin: 20px 0;
+}
+
+/* Animations */
+@keyframes bounce {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-10px);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(10px);
+  }
+}
+
+.shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+/* Floating Message */
+.floating-message {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.9);
+  color: var(--birkbeck-gold);
+  padding: 25px 50px;
+  border-radius: 10px;
+  font-size: 28px;
+  font-weight: bold;
+  animation: fadeInOut 2s ease-in-out;
+  z-index: 999;
+  border: 3px solid var(--birkbeck-gold);
+}
+
+@keyframes fadeInOut {
+  0%,
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .game-title {
+    font-size: 28px;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .sketch-button {
+    width: 100%;
+  }
+
+  #profCanvas {
+    width: 100%;
+    height: auto;
+  }
+
+  #studentCanvas {
+    width: 100%;
+    height: auto;
+  }
+
+  .bar-container {
+    width: 60%;
+  }
+}

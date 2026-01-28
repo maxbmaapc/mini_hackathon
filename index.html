@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wake Up Birkbeck! 🦉</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="game-container sketch-box">
+      <!-- Birkbeck Header with Owl Logo -->
+      <div class="birkbeck-header">
+        <div class="logo-sketch">
+          <pre class="handwritten owl-logo">
+    ___
+   {o,o}
+   |)__)
+   -"-"-
+ BIRKBECK
+ EST. 1823
+                </pre
+          >
+        </div>
+        <h1 class="game-title handwritten">⚡ Wake Up Birkbeck! 😴</h1>
+        <p class="subtitle handwritten">The 9pm Lecture Survival Simulator</p>
+        <p class="location-badge">📍 Malet Street, Room B04 | ⏰ 19:00-21:00</p>
+      </div>
+
+      <div class="game-status">
+        <div class="motto handwritten">
+          "In Nocte Consilium" - Wisdom Comes at Night
+        </div>
+      </div>
+
+      <!-- Game Content (Horizontal Layout) -->
+      <div class="game-content">
+        <!-- Left Section: Professor and Whiteboard -->
+        <div class="left-section">
+          <!-- Professor Area (Stick Figure) -->
+          <div class="professor-zone">
+            <canvas id="profCanvas" width="500" height="200"></canvas>
+            <div
+              class="speech-bubble sketch-box"
+              id="speechBubble"
+              style="display: none"
+            >
+              <p class="handwritten" id="speechText">Welcome to class...</p>
+            </div>
+          </div>
+
+          <!-- Whiteboard (Sketchy Notebook Style) -->
+          <div class="whiteboard sketch-box notebook-margin">
+            <pre class="handwritten whiteboard-text">
+╔════════════════════════════╗
+║   TONIGHT'S LECTURE        ║
+║                            ║
+║   • Stay Awake             ║
+║   • Take Notes             ║
+║   • Survive Until 9pm      ║
+║                            ║
+║   "This will be on Moodle" ║
+╚════════════════════════════╝
+            </pre>
+          </div>
+        </div>
+
+        <!-- Right Section: Student, HUD, and Controls -->
+        <div class="right-section">
+          <!-- Student Character (Animated Stick Figure) -->
+          <div class="student-zone">
+            <canvas id="studentCanvas" width="300" height="300"></canvas>
+            <div class="desk-sketch">
+              <pre class="handwritten">
+   ☕         📚        💻
+   Pret    Notes    Laptop
+═════════════════════════════
+         YOUR DESK
+                </pre
+              >
+            </div>
+            <div class="sleep-overlay" id="sleepOverlay"></div>
+          </div>
+
+          <!-- Stats HUD (Notebook Style) -->
+          <div class="hud sketch-box notebook-margin">
+            <div class="alertness-section">
+              <span class="handwritten stat-label">⚡ ALERTNESS LEVEL:</span>
+              <div class="bar-container sketch-box">
+                <div class="bar-fill" id="alertBar" style="width: 100%"></div>
+              </div>
+              <span class="handwritten percentage" id="alertPercent">100%</span>
+            </div>
+            <div class="stats-row handwritten">
+              <span class="stat-item"
+                >⏰ Time Survived: <span id="timeDisplay">0:00</span></span
+              >
+              <span class="stat-item"
+                >☕ Coffee Level: <span id="coffeeLevel">100%</span></span
+              >
+              <span class="stat-item"
+                >🏆 Score: <span id="scoreDisplay">0</span></span
+              >
+            </div>
+          </div>
+
+          <!-- Action Buttons (Sketchy) -->
+          <div class="actions">
+            <button class="sketch-button handwritten" id="coffeeBtn">
+              ☕ Pret Coffee<br />
+              <small>(+30 alertness)</small>
+            </button>
+            <button class="sketch-button handwritten" id="notesBtn">
+              📝 Take Notes<br />
+              <small>(+15 alertness)</small>
+            </button>
+            <button class="sketch-button handwritten" id="stretchBtn">
+              🙆 Stretch Break<br />
+              <small>(+20 alertness)</small>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Instructions -->
+      <div class="instructions sketch-box">
+        <p class="handwritten">
+          💡 <strong>HOW TO SURVIVE:</strong> Move your mouse, press keys, or
+          click buttons to stay awake!
+        </p>
+        <p class="handwritten small-text">
+          ⚠️ If you fall asleep, the professor WILL wake you up... dramatically!
+        </p>
+      </div>
+
+      <!-- Birkbeck Easter Eggs (Hidden Sketches) -->
+      <div class="easter-eggs">
+        <div class="doodle" style="position: absolute; top: 20px; right: 20px">
+          🏛️
+        </div>
+        <div
+          class="doodle"
+          style="position: absolute; bottom: 20px; left: 20px"
+        >
+          🎫
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div class="game-over" id="gameOver" style="display: none">
+      <div class="game-over-content sketch-box">
+        <h1 class="handwritten">😴 You Fell Asleep! 💤</h1>
+        <p class="handwritten">
+          You survived <span id="finalTime" class="highlight">0:00</span> of the
+          lecture
+        </p>
+        <p class="handwritten">
+          Final Score: <span id="finalScore" class="highlight">0</span> points
+        </p>
+        <div class="achievement handwritten">
+          <p id="achievementText">You lasted through 0% of the lecture!</p>
+        </div>
+        <button class="sketch-button handwritten large" id="restartBtn">
+          🔄 Try Again
+        </button>
+        <p class="motto handwritten small-text">
+          "Every great Birkbeck student has fallen asleep at least once... or
+          twice... or..."
+        </p>
+      </div>
+    </div>
+
+    <!-- Audio Elements (Hidden) -->
+    <audio id="coughSound" preload="auto">
+      <!-- Using data URL for simple beep tone -->
+    </audio>
+    <audio id="markerSound" preload="auto"></audio>
+    <audio id="slamSound" preload="auto"></audio>
+    <audio id="alarmSound" preload="auto"></audio>
+    <audio id="airhornSound" preload="auto"></audio>
+
+    <script src="script.js"></script>
+  </body>
+</html>
